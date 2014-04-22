@@ -45,6 +45,9 @@ public class Start extends Activity {
      */
     private SystemUiHider mSystemUiHider;
 
+    /* string for our API key*/
+    private String weatherURL = "http://api.worldweatheronline.com/free.v1/weather.ashx?key=q7hjybgjdjh3t3qask3zfpmu";
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,8 @@ public class Start extends Activity {
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
         final View contentView = findViewById(R.id.fullscreen_content);
+        
+        
 
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.
