@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 
 
-public class WeatherTabs extends Fragment {
+public class ThisWeek extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_POSITION = "position";
@@ -24,14 +24,14 @@ public class WeatherTabs extends Fragment {
 
 
     // TODO: Rename and change types and number of parameters
-    public static WeatherTabs newInstance(int position) {
-        WeatherTabs fragment = new WeatherTabs();
+    public static ThisWeek newInstance(int position) {
+        ThisWeek fragment = new ThisWeek();
         Bundle args = new Bundle();
         args.putInt(ARG_POSITION, position);
         fragment.setArguments(args);
         return fragment;
     }
-    public WeatherTabs() {
+    public ThisWeek() {
         // Required empty public constructor
     }
 
@@ -58,7 +58,7 @@ public class WeatherTabs extends Fragment {
         v.setLayoutParams(params);
         v.setLayoutParams(params);
         v.setGravity(Gravity.CENTER);
-        v.setText("Weather " + (position + 1));
+        v.setText("This Week");
 
         fl.addView(v);
         return fl;

@@ -2,6 +2,7 @@ package edu.purdue.lab6;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,12 +11,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.text.Editable;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ListView;
 
 import com.astuetz.PagerSlidingTabStrip;
 
@@ -63,12 +65,11 @@ public class Start extends FragmentActivity {
         if (id == R.id.action_settings) {
             return true;
         }else if(id == R.id.add_location){
-            Toast.makeText(getApplicationContext(), "todo", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "todo", Toast.LENGTH_SHORT).show();
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setTitle("Enter a location");
-            alert.setMessage("Enter a zipcode or city");
-
             final EditText input = new EditText(this);
+            input.setHint("Enter a zipcode or city");
             alert.setView(input);
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
@@ -133,7 +134,11 @@ public class Start extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return WeatherTabs.newInstance(position);
+            if(position==0){
+                return Today.newInstance(position);
+            }else{
+                return ThisWeek.newInstance(position);
+            }
         }
     }
 }
