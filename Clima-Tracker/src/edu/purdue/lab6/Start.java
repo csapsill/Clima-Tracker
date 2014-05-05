@@ -1,5 +1,6 @@
 package edu.purdue.lab6;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
@@ -24,16 +25,23 @@ import com.astuetz.PagerSlidingTabStrip;
 
 public class Start extends FragmentActivity {
 
+	Activity mAct;
     private final Handler handler = new Handler();
     private PagerSlidingTabStrip tabs;
     private ViewPager pager;
     private MyPagerAdapter adapter;
     private int currentColor = 0xFF547CC1;
+    DatabaseHandler database;
+    private String url = "http://api.worldweatheronline.com/free/v1/weather.ashx?key=q7hjybgjdjh3t3qask3zfpmu&q=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        
+        mAct = this;
+        
+        database = new DatabaseHandler(this);
 
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         pager = (ViewPager) findViewById(R.id.pager);
@@ -74,7 +82,9 @@ public class Start extends FragmentActivity {
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Editable value = input.getText();
+                    String value = input.getText().toString();
+                    url+=value+"&num_of_days=3&format=json";
+                    new JSON_Parse(mAct,getApplicationContext(),"GET",database).execute(url);
                 }
             });
             alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

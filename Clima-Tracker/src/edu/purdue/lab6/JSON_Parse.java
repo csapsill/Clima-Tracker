@@ -16,15 +16,20 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -39,11 +44,14 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 	String method;
 	JSONObject jObject;
 	
+	DatabaseHandler db;
+	
 	ProgressDialog progDial;
 	// constructor
-	JSON_Parse(Activity act,List<NameValuePair> list,Context context, String method){
+	JSON_Parse(Activity act,Context context, String method, DatabaseHandler db){
 		this.mAct = act;
-		this.list = list;
+		//this.list = list;
+		this.db = db;
 		this.method = method;
 		this.mContext = context;
 	}
@@ -63,13 +71,14 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 	@Override
 	protected JSONObject doInBackground(String... params) {
 		//HttpResponse httpResponse = null;
+		HttpResponse httpResponse;
 		try{
 			if(method == "POST"){
 				HttpClient httpClient = new DefaultHttpClient();
 				HttpPost httpPost = new HttpPost(params[0]);
 				httpPost.setEntity(new UrlEncodedFormEntity(list));
 
-				HttpResponse httpResponse = httpClient.execute(httpPost);
+				httpResponse = httpClient.execute(httpPost);
 				StatusLine statusLine = httpResponse.getStatusLine();
 				int statusCode = statusLine.getStatusCode();
 				if(statusCode == 200){
@@ -97,21 +106,37 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 				jObj = new JSONObject(json);
 
 			}
-			/*
 			else if(method == "GET"){
 				
 				HttpClient httpClient = new DefaultHttpClient();
-				String paramString = URLEncodedUtils.format(list, "utf-8");
-				Dataurl+= "?" +paramString;
-				HttpGet httpGet = new HttpGet(Dataurl);
+				//String paramString = URLEncodedUtils.format(list, "utf-8");
+				//params[0]+= "?" +paramString;
+				HttpGet httpGet = new HttpGet(params[0]);
 				
 				httpResponse = httpClient.execute(httpGet);
 				StatusLine statusLine = httpResponse.getStatusLine();
-				if()
+				int statusCode = statusLine.getStatusCode();
+				if(statusCode == 200){
 				
-				HttpEntity httpEntity = httpResponse.getEntity();
-				inputStream = httpEntity.getContent();
-			}*/
+					HttpEntity httpEntity = httpResponse.getEntity();
+					inputStream = httpEntity.getContent();
+				}
+				Header contentencoding = httpResponse.getFirstHeader("Content-Encoding");
+				if(contentencoding != null && contentencoding.getValue().equalsIgnoreCase("gzip")){
+					inputStream = new GZIPInputStream(inputStream);
+				}
+
+				BufferedReader mBufferedReader = new BufferedReader( new InputStreamReader(inputStream, "iso-8859-1"),8);
+				StringBuilder stringBuilder = new StringBuilder();
+				String line = null;
+				while((line = mBufferedReader.readLine()) != null ){
+					stringBuilder.append(line +"\n");
+				}
+				inputStream.close();
+				json = stringBuilder.toString();
+
+				jObj = new JSONObject(json);
+			}
 			else{
 				Log.e("Request Alert","Wrong Method Name");
 			}
@@ -132,6 +157,42 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 	
 	@Override
 	protected void onPostExecute(JSONObject obj){
+		SQLiteDatabase sq = db.getWritableDatabase();
+		ContentValues cv = new ContentValues();
+		try {
+			JSONObject jData = obj.getJSONObject("data");
+			
+			/* Get weather information for a day */
+			JSONArray jArray = jData.getJSONArray("weather");
+			for(int i = 0; i< jArray.length();i++){
+				JSONObject oneObject = jArray.getJSONObject(i);
+				
+				String date = oneObject.getString("date");
+				String tempLow = oneObject.getString("tempMinF");
+				String tempHigh = oneObject.getString("tempMaxF");
+				/* Get Weather Description*/
+				JSONArray jDesc = oneObject.getJSONArray("weatherDesc");
+				for(int j = 0; j < jDesc.length(); j++){
+					JSONObject descObject = jDesc.getJSONObject(i);
+					
+					String weatherDesc = descObject.getString("value");					
+				}
+				/* Get Weather icon URLs*/
+				JSONArray jURL = oneObject.getJSONArray("weatherIconURL");
+				for(int k = 0; k< jURL.length(); k++ ){
+					JSONObject urlObject = jURL.getJSONObject(i);
+					String weatherImageUrl = urlObject.getString("value");
+				}
+				
+				String windDirection = oneObject.getString("winddirection");
+				String windSpeed = oneObject.getString("windSpeedMiles");
+								
+			}
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		
