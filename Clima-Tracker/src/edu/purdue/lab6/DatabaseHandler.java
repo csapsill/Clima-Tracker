@@ -6,20 +6,20 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHandler extends SQLiteOpenHelper{ 
 	
-	private static final int DATABASE_VERSION = 1;
+	static final int DATABASE_VERSION = 1;
 	
-	private static final String DATABASE_NAME = "WeatherManager.db";
+	static final String DATABASE_NAME = "WeatherManager";
 	
-	private static final String TABLE_WEATHER = "weather";
+	static final String TABLE_WEATHER = "weather";
 	
 	//Datatable Columns names
-	private static final String LOCATION_ID = "location";
-	private static String DAY_ID = "day";
-	private static final String TEMPERATURE_ID = "temperature";
-	private static final String WEATHERICON_URL = "icon";
-	private static final String WEATHER_DESC = "description";
-	private static final String WINDSPEED_ID = "windspeed";
-	private static final String WINDDIRECTION_ID = "winddirection";
+	static final String location = "location";
+	static final String day = "day";
+	static final String temperature = "temperature";
+	static final String weatherIconURL = "icon";
+	static final String weatherDesc = "description";
+	static final String windSpeed = "windspeed";
+	static final String windDirection = "winddirection";
 	
 	
 
@@ -35,11 +35,14 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		String CREATE_WEATHER_TABLE = "CREATE TABLE" + TABLE_WEATHER + "("
-				+ LOCATION_ID + " TEXT," + DAY_ID + " TEXT,"
-				+ TEMPERATURE_ID + " TEXT,"  +
-				WEATHERICON_URL + " TEXT," + WEATHER_DESC + " TEXT," +
-				WINDSPEED_ID + " TEXT,"+ WINDDIRECTION_ID + " TEXT," +")";
+		String CREATE_WEATHER_TABLE = "CREATE TABLE " + TABLE_WEATHER + "("
+				+ location + " TEXT," +
+				day + " TEXT,"+
+				temperature + " TEXT," +
+				weatherIconURL + " TEXT,"+
+				weatherDesc + " TEXT," +
+				windSpeed + " TEXT," +
+				windDirection + " TEXT" + ")";
 		db.execSQL(CREATE_WEATHER_TABLE);
 	}
 	

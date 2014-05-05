@@ -18,9 +18,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,12 +44,14 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 	
 	DatabaseHandler db;
 	
+	SQLiteDatabase sq;
+	
 	ProgressDialog progDial;
 	// constructor
-	JSON_Parse(Activity act,Context context, String method, DatabaseHandler db){
+	JSON_Parse(Activity act,Context context, String method, SQLiteDatabase db){
 		this.mAct = act;
 		//this.list = list;
-		this.db = db;
+		this.sq = db;
 		this.method = method;
 		this.mContext = context;
 	}
@@ -63,7 +63,7 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 		progDial.setIndeterminate(false);
 		progDial.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		progDial.setCancelable(true);
-		progDial.show();
+		progDial = ProgressDialog.show(mAct,"","Loading...", true);
 		
 	}
 	
@@ -157,7 +157,7 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 	
 	@Override
 	protected void onPostExecute(JSONObject obj){
-		SQLiteDatabase sq = db.getWritableDatabase();
+		//SQLiteDatabase sq = db.getWritableDatabase();
 		ContentValues cv = new ContentValues();
 		try {
 			JSONObject jData = obj.getJSONObject("data");
@@ -168,7 +168,7 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 				JSONObject jZip = jRegion.getJSONObject(n);
 				
 				String zip = jZip.getString("query");
-				cv.put("LOCATION_ID", zip);
+				cv.put("location",zip);
 			}
 			
 			/* Get weather information for a day */
@@ -177,40 +177,38 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 				JSONObject oneObject = jArray.getJSONObject(i);
 				
 				String date = oneObject.getString("date");
+				System.out.println(date);
 				String tempLow = oneObject.getString("tempMinF");
 				String tempHigh = oneObject.getString("tempMaxF");
 				/* Get Weather Description*/
 				JSONArray jDesc = oneObject.getJSONArray("weatherDesc");
 				for(int j = 0; j < jDesc.length(); j++){
-					JSONObject descObject = jDesc.getJSONObject(i);
+					JSONObject descObject = jDesc.getJSONObject(j);
 					
 					String weatherDesc = descObject.getString("value");		
-					cv.put("WEATHER_DESC", weatherDesc);
+					cv.put(DatabaseHandler.weatherDesc, weatherDesc);
 				}
 				/* Get Weather icon URLs*/
-				JSONArray jURL = oneObject.getJSONArray("weatherIconURL");
+				JSONArray jURL = oneObject.getJSONArray("weatherIconUrl");
 				for(int k = 0; k< jURL.length(); k++ ){
-					JSONObject urlObject = jURL.getJSONObject(i);
+					JSONObject urlObject = jURL.getJSONObject(k);
 					String weatherImageUrl = urlObject.getString("value");
-					cv.put("WEATHERICON_URL", weatherImageUrl);
+					cv.put(DatabaseHandler.weatherIconURL, weatherImageUrl);
 				}
 				
 				String windDirection = oneObject.getString("winddirection");
-				String windSpeed = oneObject.getString("windSpeedMiles");
-				cv.put("DAY_ID", date);
-				cv.put("TEMPERATURE_ID", tempHigh);	
-				cv.put("WINDSPEED_ID", windSpeed);
-				cv.put("WINDDIRECTION_ID", windDirection);
+				String windSpeed = oneObject.getString("windspeedMiles");
+				cv.put("day", date);
+				cv.put("temperature", tempHigh);	
+				cv.put("windSpeed", windSpeed);
+				cv.put("windDirection", windDirection);
 				
-				sq.insert("TABLE_WEATHER",null,cv);
+				sq.insert("weather",null,cv);
 			}
 			
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 		
 		progDial.dismiss();
 	}

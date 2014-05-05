@@ -3,6 +3,9 @@ package edu.purdue.lab6;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+
+import android.database.sqlite.SQLiteDatabase;
+
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +31,7 @@ public class Start extends FragmentActivity {
     private MyPagerAdapter adapter;
     private int currentColor = 0xFF547CC1;
     DatabaseHandler database;
+    SQLiteDatabase db; 
     private String url = "http://api.worldweatheronline.com/free/v1/weather.ashx?key=q7hjybgjdjh3t3qask3zfpmu&q=";
 
     @Override
@@ -38,7 +42,7 @@ public class Start extends FragmentActivity {
         mAct = this;
         
         database = new DatabaseHandler(this);
-
+        db = database.getWritableDatabase();
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         pager = (ViewPager) findViewById(R.id.pager);
         adapter = new MyPagerAdapter(getSupportFragmentManager());
@@ -69,7 +73,6 @@ public class Start extends FragmentActivity {
         if (id == R.id.action_settings) {
             return true;
         }else if(id == R.id.add_location){
-            //Toast.makeText(getApplicationContext(), "todo", Toast.LENGTH_SHORT).show();
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setTitle("Enter a location");
             final EditText input = new EditText(this);
@@ -80,7 +83,8 @@ public class Start extends FragmentActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     String value = input.getText().toString();
                     url+=value+"&num_of_days=5&includelocation=yes&format=json";
-                    new JSON_Parse(mAct,getApplicationContext(),"GET",database).execute(url);
+
+                    getWeatherInfo();
                 }
             });
             alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -147,5 +151,10 @@ public class Start extends FragmentActivity {
             }
         }
     }
+    
+    public void getWeatherInfo(){
+    	new JSON_Parse(this,getApplicationContext(),"GET",db).execute(url);
+    }
 }
+
 
