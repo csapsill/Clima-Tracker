@@ -3,7 +3,6 @@ package edu.purdue.lab6;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,13 +11,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.text.Editable;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import com.astuetz.PagerSlidingTabStrip;
 
@@ -83,7 +79,7 @@ public class Start extends FragmentActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String value = input.getText().toString();
-                    url+=value+"&num_of_days=3&includelocation=yes&format=json";
+                    url+=value+"&num_of_days=5&includelocation=yes&format=json";
                     new JSON_Parse(mAct,getApplicationContext(),"GET",database).execute(url);
                 }
             });
@@ -127,7 +123,7 @@ public class Start extends FragmentActivity {
     };
 
     public class MyPagerAdapter extends FragmentPagerAdapter{
-        private final String[] TABS = {"Today", "This Week"};
+        private final String[] TABS = {"Today", "5 Days"};
 
         public MyPagerAdapter(FragmentManager fm){
             super(fm);
@@ -147,7 +143,7 @@ public class Start extends FragmentActivity {
             if(position==0){
                 return Today.newInstance(position);
             }else{
-                return ThisWeek.newInstance(position);
+                return Next5Days.newInstance(position);
             }
         }
     }

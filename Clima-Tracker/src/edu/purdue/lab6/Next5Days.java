@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 
 
-public class ThisWeek extends Fragment {
+public class Next5Days extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_POSITION = "position";
@@ -24,14 +24,14 @@ public class ThisWeek extends Fragment {
 
 
     // TODO: Rename and change types and number of parameters
-    public static ThisWeek newInstance(int position) {
-        ThisWeek fragment = new ThisWeek();
+    public static Next5Days newInstance(int position) {
+        Next5Days fragment = new Next5Days();
         Bundle args = new Bundle();
         args.putInt(ARG_POSITION, position);
         fragment.setArguments(args);
         return fragment;
     }
-    public ThisWeek() {
+    public Next5Days() {
         // Required empty public constructor
     }
 

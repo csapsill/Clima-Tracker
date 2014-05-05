@@ -45,8 +45,9 @@ public class Today extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_today,container,false);
         // Inflate the layout for this fragment
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        /*LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
         FrameLayout fl = new FrameLayout(getActivity());
         fl.setLayoutParams(params);
@@ -60,7 +61,7 @@ public class Today extends Fragment {
         v.setGravity(Gravity.CENTER);
         v.setText("Today");
 
-        fl.addView(v);
-        return fl;
+        fl.addView(v);*/
+        return rootView;
     }
 }

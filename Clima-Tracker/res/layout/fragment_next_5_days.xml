@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.purdue.lab6.Next5Days">
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="May 5th"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-light"
+            android:paddingTop="10sp"
+            android:paddingLeft="10sp"/>
+        <TextView
+            android:id="@+id/ht"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="High: 55"
+            android:paddingLeft="30sp"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="17sp"
+            android:textColor="#FF5F5F" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ht"
+            android:text="Low: 55"
+            android:paddingLeft="10sp"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="17sp"
+            android:textColor="#52BFE8" />
+</LinearLayout>
