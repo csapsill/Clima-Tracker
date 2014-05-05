@@ -162,6 +162,15 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 		try {
 			JSONObject jData = obj.getJSONObject("data");
 			
+			/* get location*/
+			JSONArray jRegion = jData.getJSONArray("request");
+			for(int n = 0; n < jRegion.length();n++){
+				JSONObject jZip = jRegion.getJSONObject(n);
+				
+				String zip = jZip.getString("query");
+				cv.put("LOCATION_ID", zip);
+			}
+			
 			/* Get weather information for a day */
 			JSONArray jArray = jData.getJSONArray("weather");
 			for(int i = 0; i< jArray.length();i++){
@@ -175,18 +184,25 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 				for(int j = 0; j < jDesc.length(); j++){
 					JSONObject descObject = jDesc.getJSONObject(i);
 					
-					String weatherDesc = descObject.getString("value");					
+					String weatherDesc = descObject.getString("value");		
+					cv.put("WEATHER_DESC", weatherDesc);
 				}
 				/* Get Weather icon URLs*/
 				JSONArray jURL = oneObject.getJSONArray("weatherIconURL");
 				for(int k = 0; k< jURL.length(); k++ ){
 					JSONObject urlObject = jURL.getJSONObject(i);
 					String weatherImageUrl = urlObject.getString("value");
+					cv.put("WEATHERICON_URL", weatherImageUrl);
 				}
 				
 				String windDirection = oneObject.getString("winddirection");
 				String windSpeed = oneObject.getString("windSpeedMiles");
-								
+				cv.put("DAY_ID", date);
+				cv.put("TEMPERATURE_ID", tempHigh);	
+				cv.put("WINDSPEED_ID", windSpeed);
+				cv.put("WINDDIRECTION_ID", windDirection);
+				
+				sq.insert("TABLE_WEATHER",null,cv);
 			}
 			
 		} catch (JSONException e) {

@@ -83,7 +83,7 @@ public class Start extends FragmentActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String value = input.getText().toString();
-                    url+=value+"&num_of_days=3&format=json";
+                    url+=value+"&num_of_days=3&includelocation=yes&format=json";
                     new JSON_Parse(mAct,getApplicationContext(),"GET",database).execute(url);
                 }
             });
