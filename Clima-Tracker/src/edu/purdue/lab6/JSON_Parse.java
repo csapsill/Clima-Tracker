@@ -27,7 +27,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -43,8 +42,6 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 	JSONObject jObject;
 	
 	DatabaseHandler db;
-	
-	SQLiteDatabase sq;
 	
 	ProgressDialog progDial;
 	// constructor

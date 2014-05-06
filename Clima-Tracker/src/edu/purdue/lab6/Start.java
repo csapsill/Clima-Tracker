@@ -83,7 +83,6 @@ public class Start extends FragmentActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     String value = input.getText().toString();
                     url+=value+"&num_of_days=5&includelocation=yes&format=json";
-
                     getWeatherInfo();
                 }
             });

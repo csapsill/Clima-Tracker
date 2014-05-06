@@ -146,5 +146,28 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		db.insert(TABLE_WEATHER,null,cv);
 		
 	}
+	
+	public String[] getTodayWeather(String today){
+		SQLiteDatabase db = this.getReadableDatabase();
+		
+		String selectQuery= "SELECT * FROM " + TABLE_WEATHER + " WHERE "
+				+ day + " = " + "2014-05-06";
+		
+		Cursor c = db.rawQuery(selectQuery, null);
+		
+		if(c != null){
+			c.moveToFirst();
+		}
+		
+		String[] weatherData = new String[6];
+		weatherData[0] = c.getString(c.getColumnIndex("tempLow"));
+		weatherData[1] = c.getString(c.getColumnIndex("tempHigh"));
+		weatherData[2] = c.getString(c.getColumnIndex("weatherIconUrl"));
+		weatherData[3] = c.getString(c.getColumnIndex("weatherDesc"));
+		weatherData[4] = c.getString(c.getColumnIndex("windSpeed"));
+		weatherData[5] = c.getString(c.getColumnIndex("windDirection"));
+		
+		return weatherData;
+	}
 
 }

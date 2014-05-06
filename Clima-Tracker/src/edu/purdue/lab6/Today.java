@@ -59,7 +59,7 @@ public class Today extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_today,container,false);
         
         
-        //cityName = (TextView)getView().findViewById(R.id.cityName);
+        cityName = (TextView) rootView.findViewById(R.id.cityName);
         
         //temp = (TextView)getView().findViewById(R.id.temp);
         
