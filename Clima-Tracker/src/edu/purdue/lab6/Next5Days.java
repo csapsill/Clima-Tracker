@@ -9,11 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class Next5Days extends Fragment {
+    private SimpleAdapter adapter;
+    ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
+    ListView listview;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_POSITION = "position";
@@ -45,8 +53,25 @@ public class Next5Days extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_next_5_days,container,false);
+        listview = (ListView) rootView.findViewById(android.R.id.list);
+
+        /*add all data before adapter
+         like this:
+         HashMap<String,String> data = new HashMap<String, String>;
+         item.put("date", string);
+         item.put("description", string);
+         item.put("high", string);
+         item.put("low", string);
+         list.add(data);
+         */
+        adapter = new SimpleAdapter(getActivity().getBaseContext(),list,R.layout.list_item,
+            new String[] {"date","description","high","low"}, new int[] {R.id.date, R.id.desc, R.id.ht, R.id.lt});
+        listview.setAdapter(adapter);
+
+
         // Inflate the layout for this fragment
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        /*LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
         FrameLayout fl = new FrameLayout(getActivity());
         fl.setLayoutParams(params);
@@ -61,6 +86,9 @@ public class Next5Days extends Fragment {
         v.setText("This Week");
 
         fl.addView(v);
-        return fl;
+        return fl;*/
+
+
+        return rootView;
     }
 }

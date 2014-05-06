@@ -1,53 +1,10 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="edu.purdue.lab6.Next5Days">
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="May 5th"
-                    android:textSize="22sp"
-                    android:fontFamily="sans-serif-light"
-                    android:paddingTop="10sp"
-                    android:paddingLeft="10sp"/>
-                <TextView
-                    android:id="@+id/desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:paddingTop="15sp"
-                    android:textSize="12sp"
-                    android:fontFamily="sans-serif-light"
-                    android:text="Light rain shower" />
-                <TextView
-                    android:id="@+id/ht"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="High: 55°"
-                    android:paddingRight="30sp"
-                    android:paddingTop="5sp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textSize="15sp"
-                    android:textColor="#FF5F5F" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@id/ht"
-                    android:text="Low: 50°"
-                    android:paddingRight="30sp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textSize="15sp"
-                    android:textColor="#52BFE8" />
-            </RelativeLayout>
-        </ScrollView>
-</FrameLayout>
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
