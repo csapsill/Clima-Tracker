@@ -162,6 +162,18 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 		try {
 			JSONObject jData = obj.getJSONObject("data");
 			
+			/* Get City Name*/
+			JSONArray jArea = jData.getJSONArray("nearest_area");
+			for(int c = 0; c < jArea.length(); c++){
+				JSONObject elem = jArea.getJSONObject(c);
+				JSONArray cityName = elem.getJSONArray("areaName");
+				for(int b = 0; b < cityName.length();b++){
+					JSONObject jCity = cityName.getJSONObject(b);
+					String city = jCity.getString("value");
+					cv.put("cityName", city);
+				}
+			}
+			
 			/* get location*/
 			JSONArray jRegion = jData.getJSONArray("request");
 			for(int n = 0; n < jRegion.length();n++){
@@ -170,6 +182,7 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 				String zip = jZip.getString("query");
 				cv.put("location",zip);
 			}
+			
 			
 			/* Get weather information for a day */
 			JSONArray jArray = jData.getJSONArray("weather");
@@ -199,7 +212,8 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 				String windDirection = oneObject.getString("winddirection");
 				String windSpeed = oneObject.getString("windspeedMiles");
 				cv.put("day", date);
-				cv.put("temperature", tempHigh);	
+				cv.put("tempLow", tempLow);
+				cv.put("tempHigh", tempHigh);	
 				cv.put("windSpeed", windSpeed);
 				cv.put("windDirection", windDirection);
 				
@@ -209,6 +223,7 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		
 		
 		progDial.dismiss();
 	}

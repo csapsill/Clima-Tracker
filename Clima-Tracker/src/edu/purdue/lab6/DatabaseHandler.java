@@ -15,11 +15,13 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	//Datatable Columns names
 	static final String location = "location";
 	static final String day = "day";
-	static final String temperature = "temperature";
+	static final String tempLow = "templow";
+	static final String tempHigh = "temphigh";
 	static final String weatherIconURL = "icon";
 	static final String weatherDesc = "description";
 	static final String windSpeed = "windspeed";
 	static final String windDirection = "winddirection";
+	static final String cityName = "cityname";
 	
 	
 
@@ -37,8 +39,10 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	public void onCreate(SQLiteDatabase db) {
 		String CREATE_WEATHER_TABLE = "CREATE TABLE " + TABLE_WEATHER + "("
 				+ location + " TEXT," +
+				cityName + " TEXT," +
 				day + " TEXT,"+
-				temperature + " TEXT," +
+				tempLow+ " TEXT," +
+				tempHigh + " TEXT," +
 				weatherIconURL + " TEXT,"+
 				weatherDesc + " TEXT," +
 				windSpeed + " TEXT," +
