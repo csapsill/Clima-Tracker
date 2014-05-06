@@ -1,96 +1,98 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="edu.purdue.lab6.Today">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/cityName"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="West Lafayette"
-        android:fontFamily="sans-serif-light"
-        android:textSize="40sp"
-        android:paddingTop="10sp"/>
-    <TextView
-        android:id="@+id/temp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/cityName"
-        android:gravity="center"
-        android:text="50°"
-        android:textSize="60sp"
-        android:textColor="#547CC1"
-        android:paddingTop="100sp"
-        android:fontFamily="sans-serif-condensed" />
-    <ImageView
-        android:id="@+id/dummy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"/>
-    <TextView
-        android:id="@+id/htemp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/temp"
-        android:layout_toLeftOf="@id/dummy"
-        android:paddingRight="10sp"
-        android:fontFamily="sans-serif-condensed"
-        android:textSize="17sp"
-        android:textColor="#FF5F5F"
-        android:text= "High: 55°" />
-    <TextView
-        android:id="@+id/ltemp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/temp"
-        android:layout_toRightOf="@id/dummy"
-        android:fontFamily="sans-serif-condensed"
-        android:textSize="17sp"
-        android:textColor="#52BFE8"
-        android:text= "Low: 50°" />
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ltemp"
-        android:gravity="center"
-        android:text="Sunny"
-        android:textSize="30sp"
-        android:fontFamily="sans-serif-light"
-        android:textColor="#bebebe"
-        android:paddingTop="10sp"
-        android:paddingBottom="12sp"/>
-    <ImageView
-        android:id="@+id/dummy1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/description"
-        android:paddingTop="15sp"
-        android:layout_centerHorizontal="true" />
-    <TextView
-        android:id="@+id/humidity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/description"
-        android:layout_toLeftOf="@id/dummy1"
-        android:text="Humidity: 100%"
-        android:textSize="17sp"
-        android:paddingRight="10sp"
-        android:fontFamily="sans-serif-condensed" />
-    <TextView
-        android:id="@+id/wind"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/description"
-        android:layout_toRightOf="@id/dummy1"
-        android:text="Wind: 10 mph E"
-
-        android:textSize="17sp"
-        android:fontFamily="sans-serif-condensed" />
-    </RelativeLayout>
-</ScrollView>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/cityName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="West Lafayette"
+                android:fontFamily="sans-serif-light"
+                android:textSize="40sp"
+                android:paddingTop="10sp"/>
+            <TextView
+                android:id="@+id/temp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cityName"
+                android:gravity="center"
+                android:text="50°"
+                android:textSize="60sp"
+                android:textColor="#547CC1"
+                android:paddingTop="100sp"
+                android:fontFamily="sans-serif-condensed" />
+            <ImageView
+                android:id="@+id/dummy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:id="@+id/htemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/temp"
+                android:layout_toLeftOf="@id/dummy"
+                android:paddingRight="10sp"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="17sp"
+                android:textColor="#FF5F5F"
+                android:text= "High: 55°" />
+            <TextView
+                android:id="@+id/ltemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/temp"
+                android:layout_toRightOf="@id/dummy"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="17sp"
+                android:textColor="#52BFE8"
+                android:text= "Low: 50°" />
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ltemp"
+                android:gravity="center"
+                android:text="Sunny"
+                android:textSize="30sp"
+                android:fontFamily="sans-serif-light"
+                android:textColor="#bebebe"
+                android:paddingTop="10sp"
+                android:paddingBottom="12sp"/>
+            <ImageView
+                android:id="@+id/dummy1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/description"
+                android:paddingTop="15sp"
+                android:layout_centerHorizontal="true" />
+            <TextView
+                android:id="@+id/humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/description"
+                android:layout_toLeftOf="@id/dummy1"
+                android:text="Humidity: 100%"
+                android:textSize="17sp"
+                android:paddingRight="10sp"
+                android:fontFamily="sans-serif-condensed" />
+            <TextView
+                android:id="@+id/wind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/description"
+                android:layout_toRightOf="@id/dummy1"
+                android:text="Wind: 10 mph E"
+                android:textSize="17sp"
+                android:fontFamily="sans-serif-condensed" />
+            </RelativeLayout>
+        </ScrollView>
+</FrameLayout>
