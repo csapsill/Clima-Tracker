@@ -28,6 +28,10 @@ public class Today extends Fragment {
     TextView cityName;
     TextView temp;
     TextView wind;
+    TextView hightemp;
+    TextView lowtemp;
+    TextView description;
+    TextView humidity;
     ImageView weatherIcon;
     // TODO: Rename and change types of parameters
 
@@ -60,7 +64,13 @@ public class Today extends Fragment {
         
         
         cityName = (TextView) rootView.findViewById(R.id.cityName);
-        
+        temp = (TextView) rootView.findViewById(R.id.temp);
+        hightemp = (TextView) rootView.findViewById(R.id.htemp);
+        lowtemp = (TextView) rootView.findViewById(R.id.ltemp);
+        description = (TextView) rootView.findViewById(R.id.description);
+        humidity = (TextView) rootView.findViewById(R.id.humidity);
+        wind = (TextView) rootView.findViewById(R.id.wind);
+
         //temp = (TextView)getView().findViewById(R.id.temp);
         
         //wind = (TextView)getView().findViewById(R.id.wind);

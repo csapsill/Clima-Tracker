@@ -23,7 +23,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cityName"
                 android:gravity="center"
-                android:text="50°"
                 android:textSize="60sp"
                 android:textColor="#547CC1"
                 android:paddingTop="100sp"
@@ -43,7 +42,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:textSize="17sp"
                 android:textColor="#FF5F5F"
-                android:text= "High: 55°" />
+                />
             <TextView
                 android:id="@+id/ltemp"
                 android:layout_width="wrap_content"
@@ -53,14 +52,14 @@
                 android:fontFamily="sans-serif-condensed"
                 android:textSize="17sp"
                 android:textColor="#52BFE8"
-                android:text= "Low: 50°" />
+                />
             <TextView
                 android:id="@+id/description"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ltemp"
                 android:gravity="center"
-                android:text="Sunny"
+
                 android:textSize="30sp"
                 android:fontFamily="sans-serif-light"
                 android:textColor="#bebebe"
@@ -79,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/description"
                 android:layout_toLeftOf="@id/dummy1"
-                android:text="Humidity: 100%"
+
                 android:textSize="17sp"
                 android:paddingRight="10sp"
                 android:fontFamily="sans-serif-condensed" />
@@ -89,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/description"
                 android:layout_toRightOf="@id/dummy1"
-                android:text="Wind: 10 mph E"
+
                 android:textSize="17sp"
                 android:fontFamily="sans-serif-condensed" />
             </RelativeLayout>

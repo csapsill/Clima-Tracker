@@ -82,6 +82,16 @@ public class Start extends FragmentActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String value = input.getText().toString();
+                    if(value.charAt(value.length()-1)==' '){ //checks if end of string is a space
+                        value = value.substring(0,value.length()-1);
+
+                    }
+                    
+                    if(value.contains(" ")){ //replaces any remaining spaces with underscores
+                        value = value.replaceAll(" ","_");
+
+                    }
+
                     url+=value+"&num_of_days=5&includelocation=yes&format=json";
                     getWeatherInfo();
                 }
