@@ -48,10 +48,10 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 	
 	ProgressDialog progDial;
 	// constructor
-	JSON_Parse(Activity act,Context context, String method, SQLiteDatabase db){
+	JSON_Parse(Activity act,Context context, String method, DatabaseHandler db){
 		this.mAct = act;
 		//this.list = list;
-		this.sq = db;
+		this.db = db;
 		this.method = method;
 		this.mContext = context;
 	}
@@ -157,10 +157,20 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 	
 	@Override
 	protected void onPostExecute(JSONObject obj){
-		//SQLiteDatabase sq = db.getWritableDatabase();
 		ContentValues cv = new ContentValues();
+		String[] locationData = new String[2];
+		String[] weatherData = new String[7];
 		try {
 			JSONObject jData = obj.getJSONObject("data");
+			
+			/* get location*/
+			JSONArray jRegion = jData.getJSONArray("request");
+			for(int n = 0; n < jRegion.length();n++){
+				JSONObject jZip = jRegion.getJSONObject(n);
+				
+				String zip = jZip.getString("query");
+				locationData[0] = zip;
+			}
 			
 			/* Get City Name*/
 			JSONArray jArea = jData.getJSONArray("nearest_area");
@@ -170,19 +180,11 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 				for(int b = 0; b < cityName.length();b++){
 					JSONObject jCity = cityName.getJSONObject(b);
 					String city = jCity.getString("value");
-					cv.put("cityName", city);
+					locationData[1] = city;
 				}
 			}
 			
-			/* get location*/
-			JSONArray jRegion = jData.getJSONArray("request");
-			for(int n = 0; n < jRegion.length();n++){
-				JSONObject jZip = jRegion.getJSONObject(n);
-				
-				String zip = jZip.getString("query");
-				cv.put("location",zip);
-			}
-			
+			db.createLocationTable(locationData);
 			
 			/* Get weather information for a day */
 			JSONArray jArray = jData.getJSONArray("weather");
@@ -191,33 +193,34 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 				
 				String date = oneObject.getString("date");
 				System.out.println(date);
+				weatherData[0] = date;
 				String tempLow = oneObject.getString("tempMinF");
 				String tempHigh = oneObject.getString("tempMaxF");
+				weatherData[1] = tempLow;
+				weatherData[2] = tempHigh;
+				/* Get Weather icon URLs*/
+				JSONArray jURL = oneObject.getJSONArray("weatherIconUrl");
+				for(int k = 0; k< jURL.length(); k++ ){
+					JSONObject urlObject = jURL.getJSONObject(k);
+					String weatherImageUrl = urlObject.getString("value");
+					weatherData[3] = weatherImageUrl;
+				}
 				/* Get Weather Description*/
 				JSONArray jDesc = oneObject.getJSONArray("weatherDesc");
 				for(int j = 0; j < jDesc.length(); j++){
 					JSONObject descObject = jDesc.getJSONObject(j);
 					
 					String weatherDesc = descObject.getString("value");		
-					cv.put(DatabaseHandler.weatherDesc, weatherDesc);
-				}
-				/* Get Weather icon URLs*/
-				JSONArray jURL = oneObject.getJSONArray("weatherIconUrl");
-				for(int k = 0; k< jURL.length(); k++ ){
-					JSONObject urlObject = jURL.getJSONObject(k);
-					String weatherImageUrl = urlObject.getString("value");
-					cv.put(DatabaseHandler.weatherIconURL, weatherImageUrl);
+					weatherData[4] = weatherDesc;
 				}
 				
 				String windDirection = oneObject.getString("winddirection");
 				String windSpeed = oneObject.getString("windspeedMiles");
-				cv.put("day", date);
-				cv.put("tempLow", tempLow);
-				cv.put("tempHigh", tempHigh);	
-				cv.put("windSpeed", windSpeed);
-				cv.put("windDirection", windDirection);
+				weatherData[5] = windSpeed;
+				weatherData[6] = windDirection;
 				
-				sq.insert("weather",null,cv);
+				db.createWeather(weatherData);
+				
 			}
 			
 		} catch (JSONException e) {

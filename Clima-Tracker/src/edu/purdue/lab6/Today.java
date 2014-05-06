@@ -27,6 +27,7 @@ public class Today extends Fragment {
 
     TextView cityName;
     TextView temp;
+    TextView wind;
     ImageView weatherIcon;
     // TODO: Rename and change types of parameters
 
@@ -58,11 +59,21 @@ public class Today extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_today,container,false);
         
         
-        cityName = (TextView)getView().findViewById(R.id.cityName);
+        //cityName = (TextView)getView().findViewById(R.id.cityName);
         
-        temp = (TextView)getView().findViewById(R.id.temp);
+        //temp = (TextView)getView().findViewById(R.id.temp);
         
-        weatherIcon= (ImageView)getView().findViewById(R.id.dummy);
+        //wind = (TextView)getView().findViewById(R.id.wind);
+        
+        //weatherIcon= (ImageView)getView().findViewById(R.id.dummy);
+        
+        String iconURL = "";
+        if(!iconURL.equals("")){//download task
+        	new DownloadImageTask(weatherIcon).execute(iconURL);
+        }
+        else{// default image
+        	
+        }
         // Inflate the layout for this fragment
         /*LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 

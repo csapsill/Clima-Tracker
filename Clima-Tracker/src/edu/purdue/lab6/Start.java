@@ -42,7 +42,7 @@ public class Start extends FragmentActivity {
         mAct = this;
         
         database = new DatabaseHandler(this);
-        db = database.getWritableDatabase();
+       // db = database.getWritableDatabase();
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         pager = (ViewPager) findViewById(R.id.pager);
         adapter = new MyPagerAdapter(getSupportFragmentManager());
@@ -153,7 +153,7 @@ public class Start extends FragmentActivity {
     }
     
     public void getWeatherInfo(){
-    	new JSON_Parse(this,getApplicationContext(),"GET",db).execute(url);
+    	new JSON_Parse(this,getApplicationContext(),"GET",database).execute(url);
     }
 }
 
