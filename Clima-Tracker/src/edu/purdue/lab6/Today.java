@@ -70,55 +70,38 @@ public class Today extends Fragment {
         Date date = new Date();
         
         dateString = (dateFormat.format(date));
-        
         long zip = Long.parseLong(Start.zipCode);
         System.out.println(zip);
-       
+
         cityName = (TextView) rootView.findViewById(R.id.cityName);
         String city = Start.database.getLocationName(zip);
         cityName.setText(city);
        
         String[] weatherData = Start.database.getTodayWeather(dateString);
         temp = (TextView) rootView.findViewById(R.id.temp);
-        temp.setText(weatherData[1]+"°");
+        temp.setText(weatherData[1]+(char) 0x00B0);
         hightemp = (TextView) rootView.findViewById(R.id.htemp);
-        hightemp.setText("High: "+weatherData[1]+"°");
+        hightemp.setText("High: "+weatherData[1]+(char) 0x00B0);
         lowtemp = (TextView) rootView.findViewById(R.id.ltemp);
-        lowtemp.setText("Low: "+weatherData[0]+"°");
+        lowtemp.setText("Low: "+weatherData[0]+(char) 0x00B0);
         description = (TextView) rootView.findViewById(R.id.description);
         description.setText(weatherData[3]);
         //humidity = (TextView) rootView.findViewById(R.id.humidity);
         wind = (TextView) rootView.findViewById(R.id.wind);
         wind.setText("Wind: "+weatherData[4] + " mph " + weatherData[5]);
 
-        /*weatherIcon = (ImageView) rootView.findViewById(R.id.dummy1);
+        weatherIcon = (ImageView) rootView.findViewById(R.id.image);
         String iconURL = weatherData[2];
         if(weatherData[2] != null){//download task
         	new DownloadImageTask(weatherIcon).execute(iconURL);
         }
         else{// default image
         	
-        }*/
-        // Inflate the layout for this fragment
-        /*LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-
-        FrameLayout fl = new FrameLayout(getActivity());
-        fl.setLayoutParams(params);
-        final int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources()
-                .getDisplayMetrics());
-
-        TextView v = new TextView(getActivity());
-        params.setMargins(margin, margin, margin, margin);
-        v.setLayoutParams(params);
-        v.setLayoutParams(params);
-        v.setGravity(Gravity.CENTER);
-        v.setText("Today");
-
-        fl.addView(v);*/
+        }
         return rootView;
     }
     
-    /*private class DownloadImageTask extends AsyncTask<String,Void,Bitmap>{
+    private class DownloadImageTask extends AsyncTask<String,Void,Bitmap>{
     	ImageView bmImage;
     	
     	public DownloadImageTask(ImageView bmImage){
@@ -143,13 +126,14 @@ public class Today extends Fragment {
 			bmImage.setImageBitmap(result);
 		}
     	
-    }*/
+    }
     
     public static void updateUI(){
-        
-    	long zip = Long.parseLong(Start.zipCode);
-    	System.out.println(zip);
+
+        long zip = Long.parseLong(Start.zipCode);
+        System.out.println(zip);
         String city = Start.database.getLocationName(zip);
+
         cityName.setText(city);
        
         String[] weatherData = Start.database.getTodayWeather(dateString);
@@ -163,5 +147,9 @@ public class Today extends Fragment {
         description.setText(weatherData[3]);
 
         wind.setText("Wind: "+weatherData[4] + " mph " + weatherData[5]);
+
+
+
+
     }
 }

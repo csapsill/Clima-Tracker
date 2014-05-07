@@ -9,72 +9,89 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/cityName"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="sans-serif-light"
-                android:textSize="40sp"
-                android:paddingTop="10sp"/>
-            <TextView
-                android:id="@+id/temp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/cityName"
-                android:gravity="center"
-                android:textSize="60sp"
-                android:textColor="#547CC1"
-                android:paddingTop="100sp"
-                android:fontFamily="sans-serif-condensed" />
-            <ImageView
-                android:id="@+id/dummy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"/>
-            <TextView
-                android:id="@+id/htemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/temp"
-                android:layout_toLeftOf="@id/dummy"
-                android:paddingRight="10sp"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="17sp"
-                android:textColor="#FF5F5F"
-                />
-            <TextView
-                android:id="@+id/ltemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/temp"
-                android:layout_toRightOf="@id/dummy"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="17sp"
-                android:textColor="#52BFE8"
-                />
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ltemp"
-                android:gravity="center"
+                <TextView
+                    android:id="@+id/cityName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="40sp"
+                    android:paddingTop="10sp"/>
+                <ImageView
+                    android:id="@+id/dummy1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cityName"
+                    android:paddingTop="100sp"
+                    android:layout_centerHorizontal="true"/>
+                <TextView
+                    android:id="@+id/temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cityName"
+                    android:layout_toLeftOf="@id/dummy1"
 
-                android:textSize="30sp"
-                android:fontFamily="sans-serif-light"
-                android:textColor="#bebebe"
-                android:paddingTop="10sp"
-                android:paddingBottom="12sp"/>
+                    android:textSize="60sp"
+                    android:textColor="#547CC1"
+                    android:paddingTop="100sp"
+                    android:fontFamily="sans-serif-condensed" />
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="492px"
+                    android:layout_height="492px"
+                    android:layout_toRightOf="@id/temp"
+                    android:layout_below="@id/cityName"
+                    android:scaleType="fitStart"
+                    android:paddingTop="120sp" />
 
-            <TextView
-                android:id="@+id/wind"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/description"
-                android:layout_centerHorizontal="true"
+                <ImageView
+                    android:id="@+id/dummy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"/>
+                <TextView
+                    android:id="@+id/htemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/temp"
+                    android:layout_toLeftOf="@id/dummy"
+                    android:paddingRight="10sp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textSize="17sp"
+                    android:textColor="#FF5F5F"
+                    />
+                <TextView
+                    android:id="@+id/ltemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/temp"
+                    android:layout_toRightOf="@id/dummy"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textSize="17sp"
+                    android:textColor="#52BFE8"
+                    />
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ltemp"
+                    android:gravity="center"
 
-                android:textSize="17sp"
-                android:fontFamily="sans-serif-condensed" />
+                    android:textSize="30sp"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="#bebebe"
+                    android:paddingTop="10sp"
+                    android:paddingBottom="12sp"/>
+
+                <TextView
+                    android:id="@+id/wind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/description"
+                    android:layout_centerHorizontal="true"
+
+                    android:textSize="17sp"
+                    android:fontFamily="sans-serif-condensed" />
             </RelativeLayout>
         </ScrollView>
 </FrameLayout>

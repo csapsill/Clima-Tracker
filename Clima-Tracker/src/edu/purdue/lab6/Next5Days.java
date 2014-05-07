@@ -72,8 +72,8 @@ public class Next5Days extends Fragment {
         	HashMap<String,String> item = new HashMap<String,String>();
         	item.put("date", weatherData[0]);
         	item.put("description",weatherData[3]);
-        	item.put("high", "High: "+weatherData[2]+"°");
-        	item.put("low", "Low: "+weatherData[1]+"°");
+        	item.put("high", "High: "+weatherData[2]+(char) 0x00B0);
+        	item.put("low", "Low: "+weatherData[1]+(char) 0x00B0);
         	
         	list.add(item);
         	i++;        	
@@ -104,6 +104,4 @@ public class Next5Days extends Fragment {
 
         return rootView;
     }
-    
-
 }
