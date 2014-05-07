@@ -65,6 +65,20 @@ public class Next5Days extends Fragment {
          item.put("low", string);
          list.add(data);
          */
+        List<String[]> dateList = Start.database.getAllWeather();
+        int i =0;
+        while(i < dateList.size()){
+        	String[] weatherData = dateList.get(i);
+        	HashMap<String,String> item;
+        	item = new HashMap<String,String>();
+        	item.put("date", weatherData[0]);
+        	item.put("description",weatherData[3]);
+        	item.put("high", weatherData[2]);
+        	item.put("low", weatherData[1]);
+        	
+        	list.add(item);
+        	i++;        	
+        }
         adapter = new SimpleAdapter(getActivity().getBaseContext(),list,R.layout.list_item,
             new String[] {"date","description","high","low"}, new int[] {R.id.date, R.id.desc, R.id.ht, R.id.lt});
         listview.setAdapter(adapter);
