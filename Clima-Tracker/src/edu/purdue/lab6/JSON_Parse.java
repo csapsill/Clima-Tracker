@@ -156,7 +156,7 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 	protected void onPostExecute(JSONObject obj){
 		ContentValues cv = new ContentValues();
 		String[] locationData = new String[2];
-		String[] weatherData = new String[7];
+		String[] weatherData = new String[8];
 		try {
 			JSONObject jData = obj.getJSONObject("data");
 			
@@ -225,7 +225,8 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 		}
 		
 		Today.updateUI();
-		Next5Days.updateList();
+		Next5Days list = new Next5Days();
+		list.updateList();
 		progDial.dismiss();
 	}
 }

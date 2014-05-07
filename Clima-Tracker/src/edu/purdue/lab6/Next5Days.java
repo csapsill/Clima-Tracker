@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ListView;
@@ -22,8 +23,8 @@ import java.util.List;
 
 
 public class Next5Days extends Fragment {
-    private SimpleAdapter adapter;
-    ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
+    private static SimpleAdapter adapter;
+    static ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
     static ListView listview;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -99,7 +100,35 @@ public class Next5Days extends Fragment {
         return rootView;
     }
     
-    public static void updateList(){
-    	listview.invalidateViews();
+    public void updateList(){
+    	   List<String[]> dateList = Start.database.getAllWeather();
+           int i =0;
+           while(i < dateList.size()){
+           	String[] weatherData = dateList.get(i);
+           	HashMap<String,String> item = new HashMap<String,String>();
+               String old = "yyyy-MM-dd";
+               String new1 = "MMM dd";
+               SimpleDateFormat sd = new SimpleDateFormat(old);
+               try {
+                   Date date = sd.parse(weatherData[0]);
+                   sd.applyPattern(new1);
+                   weatherData[0] = sd.format(date);
+
+               } catch (ParseException e) {
+                   e.printStackTrace();
+               }
+
+            item.put("date", weatherData[0]);
+           	item.put("description",weatherData[3]);
+           	item.put("high", "High: "+weatherData[2]+(char) 0x00B0);
+           	item.put("low", "Low: "+weatherData[1]+(char) 0x00B0);
+           	
+           	list.add(item);
+           	i++;        	
+           }
+           
+           ((BaseAdapter) listview.getAdapter()).notifyDataSetChanged();
+    	
     }
+    
 }
