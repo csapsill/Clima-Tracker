@@ -32,6 +32,7 @@ public class Start extends FragmentActivity {
     private MyPagerAdapter adapter;
     private int currentColor = 0xFF547CC1;
     static DatabaseHandler database;
+    static String zipCode = "0";
 
     SQLiteDatabase db; 
     
@@ -86,8 +87,8 @@ public class Start extends FragmentActivity {
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    String value = input.getText().toString();
-                    url+=value+"&num_of_days=5&includelocation=yes&format=json";
+                    zipCode = input.getText().toString();
+                    url+=zipCode+"&num_of_days=5&includelocation=yes&format=json";
                     getWeatherInfo();
                 }
             });

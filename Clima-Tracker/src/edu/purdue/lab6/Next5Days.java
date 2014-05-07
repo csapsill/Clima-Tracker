@@ -104,4 +104,6 @@ public class Next5Days extends Fragment {
 
         return rootView;
     }
+    
+
 }

@@ -70,9 +70,12 @@ public class Today extends Fragment {
         Date date = new Date();
         
         dateString = (dateFormat.format(date));
+        
+        long zip = Long.parseLong(Start.zipCode);
+        System.out.println(zip);
        
         cityName = (TextView) rootView.findViewById(R.id.cityName);
-        String city = Start.database.getLocationName(47906);
+        String city = Start.database.getLocationName(zip);
         cityName.setText(city);
        
         String[] weatherData = Start.database.getTodayWeather(dateString);
@@ -144,7 +147,9 @@ public class Today extends Fragment {
     
     public static void updateUI(){
         
-        String city = Start.database.getLocationName(47906);
+    	long zip = Long.parseLong(Start.zipCode);
+    	System.out.println(zip);
+        String city = Start.database.getLocationName(zip);
         cityName.setText(city);
        
         String[] weatherData = Start.database.getTodayWeather(dateString);
