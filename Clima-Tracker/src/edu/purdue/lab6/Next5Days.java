@@ -120,8 +120,8 @@ public class Next5Days extends Fragment {
 
             item.put("date", weatherData[0]);
            	item.put("description",weatherData[3]);
-           	item.put("high", "High: "+weatherData[2]+(char) 0x00B0);
-           	item.put("low", "Low: "+weatherData[1]+(char) 0x00B0);
+           	item.put("high", "High: "+weatherData[2]+"℉");
+           	item.put("low", "Low: "+weatherData[1]+"℉");
            	
            	list.add(item);
            	i++;        	
