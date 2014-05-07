@@ -224,7 +224,7 @@ public class JSON_Parse extends AsyncTask<String,String,JSONObject>{
 			e.printStackTrace();
 		}
 		
-		
+		Today.updateUI();
 		progDial.dismiss();
 	}
 }

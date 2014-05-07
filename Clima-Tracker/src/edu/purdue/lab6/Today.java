@@ -28,15 +28,16 @@ public class Today extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_POSITION = "position";
 
-    TextView cityName;
-    TextView temp;
-    TextView wind;
-    TextView hightemp;
-    TextView lowtemp;
-    TextView description;
-    TextView humidity;
+    static TextView cityName;
+    static TextView temp;
+    static TextView wind;
+    static TextView hightemp;
+    static TextView lowtemp;
+    static TextView description;
+    static TextView humidity;
     ImageView weatherIcon;
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    static String dateString;
     // TODO: Rename and change types of parameters
 
     private int position;
@@ -68,9 +69,8 @@ public class Today extends Fragment {
         
         Date date = new Date();
         
-        String dateString = (dateFormat.format(date));
-        
-        
+        dateString = (dateFormat.format(date));
+       
         cityName = (TextView) rootView.findViewById(R.id.cityName);
         String city = Start.database.getLocationName(47906);
         cityName.setText(city);
@@ -141,4 +141,22 @@ public class Today extends Fragment {
 		}
     	
     }*/
+    
+    public static void updateUI(){
+        
+        String city = Start.database.getLocationName(47906);
+        cityName.setText(city);
+       
+        String[] weatherData = Start.database.getTodayWeather(dateString);
+       
+        temp.setText(weatherData[1]+"°");
+        
+        hightemp.setText("High: "+weatherData[1]+"°");
+        
+        lowtemp.setText("Low: "+weatherData[0]+"°");
+       
+        description.setText(weatherData[3]);
+
+        wind.setText("Wind: "+weatherData[4] + " mph " + weatherData[5]);
+    }
 }
