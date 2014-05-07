@@ -67,20 +67,25 @@ public class Today extends Fragment {
         // Leave this commented until you run it and enter a zip code
         // Then uncomment these next 2 lines and run again. You will see
         // the city name displayed
-        //String city = Start.database.getLocationName(47906);
-        //cityName.setText(city);
+        String city = Start.database.getLocationName(47906);
+        cityName.setText(city);
         // Leave this commented until youve checked that the city name is working
         // then try uncommenting this and you will receive the error
-        //String[] weatherData = Start.database.getTodayWeather("2014-05-06");
+        String[] weatherData = Start.database.getTodayWeather("2014-05-06");
         temp = (TextView) rootView.findViewById(R.id.temp);
+        temp.setText(weatherData[1]);
         hightemp = (TextView) rootView.findViewById(R.id.htemp);
+        hightemp.setText(weatherData[1]);
         lowtemp = (TextView) rootView.findViewById(R.id.ltemp);
+        lowtemp.setText(weatherData[0]);
         description = (TextView) rootView.findViewById(R.id.description);
+        description.setText(weatherData[3]);
         humidity = (TextView) rootView.findViewById(R.id.humidity);
         wind = (TextView) rootView.findViewById(R.id.wind);
+        wind.setText(weatherData[4] + " " + weatherData[5]);
 
-        
-        String iconURL = "";
+        weatherIcon = (ImageView) rootView.findViewById(R.id.dummy1);
+        String iconURL = weatherData[2];
         if(!iconURL.equals("")){//download task
         	new DownloadImageTask(weatherIcon).execute(iconURL);
         }

@@ -105,7 +105,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
             locationName = c.getString(c.getColumnIndex(cityName));
 
 		}
-		//c.close();
+		c.close();
 
 		return locationName;
 		
@@ -150,21 +150,21 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		SQLiteDatabase db = this.getReadableDatabase();
 		
 		String selectQuery= "SELECT * FROM " + TABLE_WEATHER + " WHERE "
-				+ day + " = " + "2014-05-06";
+				+ day + " = " + "?";
 		
-		Cursor c = db.rawQuery(selectQuery, null);
-		
-		if(c != null){
+		Cursor c = db.rawQuery(selectQuery, new String[] {today});
+		System.out.println(c.getCount());
+		String[] weatherData = new String[6];
+		if(c != null && c.getCount() > 0){
 			c.moveToFirst();
+			weatherData[0] = c.getString(c.getColumnIndex(tempLow));
+			weatherData[1] = c.getString(c.getColumnIndex(tempHigh));
+			weatherData[2] = c.getString(c.getColumnIndex(weatherIconURL));
+			weatherData[3] = c.getString(c.getColumnIndex(weatherDesc));
+			weatherData[4] = c.getString(c.getColumnIndex(windSpeed));
+			weatherData[5] = c.getString(c.getColumnIndex(windDirection));
 		}
 		
-		String[] weatherData = new String[6];
-		weatherData[0] = c.getString(c.getColumnIndex("tempLow"));
-		weatherData[1] = c.getString(c.getColumnIndex("tempHigh"));
-		weatherData[2] = c.getString(c.getColumnIndex("weatherIconUrl"));
-		weatherData[3] = c.getString(c.getColumnIndex("weatherDesc"));
-		weatherData[4] = c.getString(c.getColumnIndex("windSpeed"));
-		weatherData[5] = c.getString(c.getColumnIndex("windDirection"));
 		
 		return weatherData;
 	}
