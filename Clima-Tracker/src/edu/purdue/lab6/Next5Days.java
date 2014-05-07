@@ -24,7 +24,7 @@ import java.util.List;
 public class Next5Days extends Fragment {
     private SimpleAdapter adapter;
     ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
-    ListView listview;
+    static ListView listview;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_POSITION = "position";
@@ -97,5 +97,9 @@ public class Next5Days extends Fragment {
             new String[] {"date","description","high","low"}, new int[] {R.id.date, R.id.desc, R.id.ht, R.id.lt});
         listview.setAdapter(adapter);
         return rootView;
+    }
+    
+    public static void updateList(){
+    	listview.invalidateViews();
     }
 }

@@ -107,6 +107,22 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		
 	}
 	
+	public String getFirstName(){
+	SQLiteDatabase db = this.getReadableDatabase();
+		
+		String selectQuery= "SELECT * FROM " + LOCATION_TABLE;
+        String locationName = "";
+		Cursor c = db.rawQuery(selectQuery, null);
+		
+		if ( c != null && c.moveToFirst()){
+            locationName = c.getString(c.getColumnIndex(cityName));
+
+		}
+		c.close();
+
+		return locationName;
+	}
+	
 	public List<String> getAllLocationNames(){
 		List<String> cityNames = new ArrayList<String>();
 		String selectQuery = "SELECT * FROM " + LOCATION_TABLE;

@@ -35,7 +35,7 @@ public class Today extends Fragment {
     static TextView lowtemp;
     static TextView description;
     static TextView humidity;
-    ImageView weatherIcon;
+    static ImageView weatherIcon;
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     static String dateString;
     // TODO: Rename and change types of parameters
@@ -74,16 +74,16 @@ public class Today extends Fragment {
         System.out.println(zip);
 
         cityName = (TextView) rootView.findViewById(R.id.cityName);
-        String city = Start.database.getLocationName(zip);
+        String city = Start.database.getFirstName();
         cityName.setText(city);
        
         String[] weatherData = Start.database.getTodayWeather(dateString);
         temp = (TextView) rootView.findViewById(R.id.temp);
-        temp.setText(weatherData[1]+(char) 0x00B0);
+        temp.setText(weatherData[1]+"\u2109");
         hightemp = (TextView) rootView.findViewById(R.id.htemp);
-        hightemp.setText("High: "+weatherData[1]+(char) 0x00B0);
+        hightemp.setText("High: "+weatherData[1]+"\u2109");
         lowtemp = (TextView) rootView.findViewById(R.id.ltemp);
-        lowtemp.setText("Low: "+weatherData[0]+(char) 0x00B0);
+        lowtemp.setText("Low: "+weatherData[0]+"\u2109");
         description = (TextView) rootView.findViewById(R.id.description);
         description.setText(weatherData[3]);
         //humidity = (TextView) rootView.findViewById(R.id.humidity);
@@ -93,7 +93,8 @@ public class Today extends Fragment {
         weatherIcon = (ImageView) rootView.findViewById(R.id.image);
         String iconURL = weatherData[2];
         if(weatherData[2] != null){//download task
-        	new DownloadImageTask(weatherIcon).execute(iconURL);
+        	loadImage(weatherData[2]);
+        	//new DownloadImageTask(weatherIcon).execute(iconURL);
         }
         else{// default image
         	
@@ -101,7 +102,7 @@ public class Today extends Fragment {
         return rootView;
     }
     
-    private class DownloadImageTask extends AsyncTask<String,Void,Bitmap>{
+    private static class DownloadImageTask extends AsyncTask<String,Void,Bitmap>{
     	ImageView bmImage;
     	
     	public DownloadImageTask(ImageView bmImage){
@@ -138,18 +139,29 @@ public class Today extends Fragment {
        
         String[] weatherData = Start.database.getTodayWeather(dateString);
        
-        temp.setText(weatherData[1]+"°");
+        temp.setText(weatherData[1]+"\u2109");
         
-        hightemp.setText("High: "+weatherData[1]+"°");
+        hightemp.setText("High: "+weatherData[1]+"\u2109");
         
-        lowtemp.setText("Low: "+weatherData[0]+"°");
-       
+        lowtemp.setText("Low: "+weatherData[0]+"\u2109");       
         description.setText(weatherData[3]);
 
         wind.setText("Wind: "+weatherData[4] + " mph " + weatherData[5]);
+        
+        loadImage(weatherData[2]);
 
 
 
 
+    }
+    
+    public static void loadImage(String urlIcon){
+    	   String iconURL;
+           if(urlIcon != null){//download task
+           	new DownloadImageTask(weatherIcon).execute(urlIcon);
+           }
+           else{// default image
+           	
+           }
     }
 }
