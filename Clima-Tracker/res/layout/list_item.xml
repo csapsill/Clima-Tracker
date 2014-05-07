@@ -13,7 +13,6 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="May 5th"
                 android:textSize="22sp"
                 android:fontFamily="sans-serif-light"
                 android:paddingTop="10sp"
@@ -25,14 +24,12 @@
                 android:layout_centerHorizontal="true"
                 android:paddingTop="15sp"
                 android:textSize="12sp"
-                android:fontFamily="sans-serif-light"
-                android:text="Light rain shower" />
+                android:fontFamily="sans-serif-light" />
             <TextView
                 android:id="@+id/ht"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="High: 55°"
                 android:paddingRight="30sp"
                 android:paddingTop="5sp"
                 android:fontFamily="sans-serif-condensed"
@@ -44,7 +41,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@id/ht"
-                android:text="Low: 50°"
                 android:paddingRight="30sp"
                 android:fontFamily="sans-serif-condensed"
                 android:textSize="15sp"

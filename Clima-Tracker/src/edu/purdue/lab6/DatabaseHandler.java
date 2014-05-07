@@ -54,10 +54,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 	
-	/* TABLE_WEATHER Example 
-	 * LOCATION_ID | DAY_ID | TEMPERATURE_ID | WEATHERICON_URL | WEATHER_DESC | WINDSPEED_ID | WINDDIRECTION_ID 
-	 * 47906 		05-05-14	66				http://			 Sunny			15				SWW
-	 */
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
