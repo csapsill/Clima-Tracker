@@ -69,25 +69,25 @@ public class Today extends Fragment {
        
         String[] weatherData = Start.database.getTodayWeather("2014-05-06");
         temp = (TextView) rootView.findViewById(R.id.temp);
-        temp.setText(weatherData[1]);
+        temp.setText(weatherData[1]+"°");
         hightemp = (TextView) rootView.findViewById(R.id.htemp);
-        hightemp.setText(weatherData[1]);
+        hightemp.setText("High: "+weatherData[1]+"°");
         lowtemp = (TextView) rootView.findViewById(R.id.ltemp);
-        lowtemp.setText(weatherData[0]);
+        lowtemp.setText("Low: "+weatherData[0]+"°");
         description = (TextView) rootView.findViewById(R.id.description);
         description.setText(weatherData[3]);
-        humidity = (TextView) rootView.findViewById(R.id.humidity);
+        //humidity = (TextView) rootView.findViewById(R.id.humidity);
         wind = (TextView) rootView.findViewById(R.id.wind);
-        wind.setText(weatherData[4] + " " + weatherData[5]);
+        wind.setText("Wind: "+weatherData[4] + " mph " + weatherData[5]);
 
-        weatherIcon = (ImageView) rootView.findViewById(R.id.dummy1);
+        /*weatherIcon = (ImageView) rootView.findViewById(R.id.dummy1);
         String iconURL = weatherData[2];
         if(weatherData[2] != null){//download task
         	new DownloadImageTask(weatherIcon).execute(iconURL);
         }
         else{// default image
         	
-        }
+        }*/
         // Inflate the layout for this fragment
         /*LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
@@ -107,7 +107,7 @@ public class Today extends Fragment {
         return rootView;
     }
     
-    private class DownloadImageTask extends AsyncTask<String,Void,Bitmap>{
+    /*private class DownloadImageTask extends AsyncTask<String,Void,Bitmap>{
     	ImageView bmImage;
     	
     	public DownloadImageTask(ImageView bmImage){
@@ -132,5 +132,5 @@ public class Today extends Fragment {
 			bmImage.setImageBitmap(result);
 		}
     	
-    }
+    }*/
 }
