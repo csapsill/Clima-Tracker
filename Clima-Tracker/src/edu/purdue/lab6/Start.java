@@ -1,11 +1,11 @@
 package edu.purdue.lab6;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-
 import android.database.sqlite.SQLiteDatabase;
-
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +18,7 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 
 import com.astuetz.PagerSlidingTabStrip;
 
@@ -30,8 +31,10 @@ public class Start extends FragmentActivity {
     private ViewPager pager;
     private MyPagerAdapter adapter;
     private int currentColor = 0xFF547CC1;
-    DatabaseHandler database;
+    static DatabaseHandler database;
+
     SQLiteDatabase db; 
+    
     private String url = "http://api.worldweatheronline.com/free/v1/weather.ashx?key=q7hjybgjdjh3t3qask3zfpmu&q=";
 
     @Override
@@ -42,7 +45,7 @@ public class Start extends FragmentActivity {
         mAct = this;
         
         database = new DatabaseHandler(this);
-       // db = database.getWritableDatabase();
+       
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         pager = (ViewPager) findViewById(R.id.pager);
         adapter = new MyPagerAdapter(getSupportFragmentManager());
@@ -53,6 +56,7 @@ public class Start extends FragmentActivity {
         pager.setPageMargin(pageMargin);
         tabs.setViewPager(pager);
         tabs.setIndicatorColor(currentColor);
+        
 
     }
 
@@ -72,7 +76,8 @@ public class Start extends FragmentActivity {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
-        }else if(id == R.id.add_location){
+        }
+        else if(id == R.id.add_location){
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setTitle("Enter a location");
             final EditText input = new EditText(this);
@@ -82,16 +87,6 @@ public class Start extends FragmentActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String value = input.getText().toString();
-                    if(value.charAt(value.length()-1)==' '){ //checks if end of string is a space
-                        value = value.substring(0,value.length()-1);
-
-                    }
-                    
-                    if(value.contains(" ")){ //replaces any remaining spaces with underscores
-                        value = value.replaceAll(" ","_");
-
-                    }
-
                     url+=value+"&num_of_days=5&includelocation=yes&format=json";
                     getWeatherInfo();
                 }
@@ -165,5 +160,4 @@ public class Start extends FragmentActivity {
     	new JSON_Parse(this,getApplicationContext(),"GET",database).execute(url);
     }
 }
-
 
