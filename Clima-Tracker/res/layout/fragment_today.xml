@@ -30,7 +30,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/cityName"
                     android:layout_toLeftOf="@id/dummy1"
-
                     android:textSize="60sp"
                     android:textColor="#547CC1"
                     android:paddingTop="100sp"
@@ -42,20 +41,23 @@
                     android:layout_toRightOf="@id/temp"
                     android:layout_below="@id/cityName"
                     android:scaleType="fitStart"
+                    android:paddingLeft="10sp"
                     android:paddingTop="120sp" />
 
                 <ImageView
                     android:id="@+id/dummy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/temp"
                     android:layout_centerHorizontal="true"/>
+
                 <TextView
                     android:id="@+id/htemp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/temp"
                     android:layout_toLeftOf="@id/dummy"
-                    android:paddingRight="10sp"
+                    android:paddingRight="5sp"
                     android:fontFamily="sans-serif-condensed"
                     android:textSize="17sp"
                     android:textColor="#FF5F5F"
@@ -72,12 +74,11 @@
                     />
                 <TextView
                     android:id="@+id/description"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ltemp"
-                    android:gravity="center"
-
-                    android:textSize="30sp"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="20sp"
                     android:fontFamily="sans-serif-light"
                     android:textColor="#bebebe"
                     android:paddingTop="10sp"
@@ -89,7 +90,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/description"
                     android:layout_centerHorizontal="true"
-
                     android:textSize="17sp"
                     android:fontFamily="sans-serif-condensed" />
             </RelativeLayout>

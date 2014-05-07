@@ -13,7 +13,10 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -70,7 +73,19 @@ public class Next5Days extends Fragment {
         while(i < dateList.size()){
         	String[] weatherData = dateList.get(i);
         	HashMap<String,String> item = new HashMap<String,String>();
-        	item.put("date", weatherData[0]);
+            String old = "yyyy-MM-dd";
+            String new1 = "MMM dd";
+            SimpleDateFormat sd = new SimpleDateFormat(old);
+            try {
+                Date date = sd.parse(weatherData[0]);
+                sd.applyPattern(new1);
+                weatherData[0] = sd.format(date);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            item.put("date", weatherData[0]);
         	item.put("description",weatherData[3]);
         	item.put("high", "High: "+weatherData[2]+(char) 0x00B0);
         	item.put("low", "Low: "+weatherData[1]+(char) 0x00B0);
@@ -81,27 +96,6 @@ public class Next5Days extends Fragment {
         adapter = new SimpleAdapter(getActivity().getBaseContext(),list,R.layout.list_item,
             new String[] {"date","description","high","low"}, new int[] {R.id.date, R.id.desc, R.id.ht, R.id.lt});
         listview.setAdapter(adapter);
-
-
-        // Inflate the layout for this fragment
-        /*LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-
-        FrameLayout fl = new FrameLayout(getActivity());
-        fl.setLayoutParams(params);
-        final int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources()
-                .getDisplayMetrics());
-
-        TextView v = new TextView(getActivity());
-        params.setMargins(margin, margin, margin, margin);
-        v.setLayoutParams(params);
-        v.setLayoutParams(params);
-        v.setGravity(Gravity.CENTER);
-        v.setText("This Week");
-
-        fl.addView(v);
-        return fl;*/
-
-
         return rootView;
     }
 }

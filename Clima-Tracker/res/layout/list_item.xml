@@ -13,7 +13,7 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 android:fontFamily="sans-serif-light"
                 android:paddingTop="10sp"
                 android:paddingLeft="10sp"/>
