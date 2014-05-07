@@ -98,16 +98,15 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		
 		String selectQuery= "SELECT * FROM " + LOCATION_TABLE + " WHERE "
 				+ zipCode + " = " + location_id;
-		
+        String locationName = "";
 		Cursor c = db.rawQuery(selectQuery, null);
 		
-		if ( c != null){
-			c.moveToFirst();
+		if ( c != null && c.moveToFirst()){
+            locationName = c.getString(c.getColumnIndex(cityName));
+
 		}
-		
-		String locationName;
-		locationName = c.getString(c.getColumnIndex(cityName));
-		
+		//c.close();
+
 		return locationName;
 		
 	}
