@@ -1,12 +1,15 @@
 package edu.purdue.lab6;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -33,6 +36,7 @@ public class Today extends Fragment {
     TextView description;
     TextView humidity;
     ImageView weatherIcon;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     // TODO: Rename and change types of parameters
 
     private int position;
@@ -62,12 +66,16 @@ public class Today extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_today,container,false);
         
+        Date date = new Date();
+        
+        String dateString = (dateFormat.format(date));
+        
         
         cityName = (TextView) rootView.findViewById(R.id.cityName);
         String city = Start.database.getLocationName(47906);
         cityName.setText(city);
        
-        String[] weatherData = Start.database.getTodayWeather("2014-05-06");
+        String[] weatherData = Start.database.getTodayWeather(dateString);
         temp = (TextView) rootView.findViewById(R.id.temp);
         temp.setText(weatherData[1]+"°");
         hightemp = (TextView) rootView.findViewById(R.id.htemp);
