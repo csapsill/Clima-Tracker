@@ -69,8 +69,7 @@ public class Next5Days extends Fragment {
         int i =0;
         while(i < dateList.size()){
         	String[] weatherData = dateList.get(i);
-        	HashMap<String,String> item;
-        	item = new HashMap<String,String>();
+        	HashMap<String,String> item = new HashMap<String,String>();
         	item.put("date", weatherData[0]);
         	item.put("description",weatherData[3]);
         	item.put("high", weatherData[2]);

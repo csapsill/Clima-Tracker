@@ -167,7 +167,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	
 	public List<String[]> getAllWeather(){
 		List<String[]> allweather = new ArrayList<String[]>();
-		String[]singleday = new String[4];
 		
 		String selectQuery = "SELECT * FROM " + TABLE_WEATHER;
 		
@@ -176,7 +175,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		Cursor c = db.rawQuery(selectQuery, null);
 		
 		if(c.moveToFirst()){
-			do {
+			do {	
+				String[] singleday = new String[4];
 				singleday[0] = c.getString(c.getColumnIndex(day));
 				singleday[1] = c.getString(c.getColumnIndex(tempLow));
 				singleday[2] = c.getString(c.getColumnIndex(tempHigh));
